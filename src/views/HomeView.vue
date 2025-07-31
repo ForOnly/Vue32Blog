@@ -24,11 +24,7 @@ getMyBlogs();
       <hr />
       <div class="columns is-tablet is-multiline mt-4">
         <!-- Limit the main page to only display the latest 6 blogs -->
-        <CardBlogView
-          v-for="(blog, i) in myBlogs.slice(Math.max(myBlogs.length - 6, 0))"
-          :key="i"
-          :blog="blog"
-        />
+        <CardBlogView v-for="(blog, i) in myBlogs.slice(Math.max(myBlogs.length - 6, 0))" :key="i" :blog="blog" />
       </div>
     </div>
   </section>

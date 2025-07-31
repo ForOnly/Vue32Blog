@@ -24,12 +24,7 @@ useSystem().changeTitle(props.tagName);
       <div class="is-size-5 has-text-left">Tag: {{ tagName }}</div>
       <hr />
       <div class="columns is-tablet is-multiline mt-4">
-        <CardBlogView
-          v-for="(blog, i) in myTag"
-          :key="i"
-          :blog="blog"
-          :cover="blog.cover"
-        />
+        <CardBlogView v-for="(blog, i) in myTag" :key="i" :blog="blog" :cover="blog.cover" />
       </div>
     </div>
   </section>

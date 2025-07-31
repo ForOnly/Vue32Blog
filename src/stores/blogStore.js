@@ -18,9 +18,7 @@ export const useBlogStore = defineStore("blogStore", () => {
   async function getMyInfo() {
     try {
       if (myInfo.value.length < 1) {
-        await axios
-          .get("/data/config/info.json")
-          .then((response) => (myInfo.value = response.data.info));
+        await axios.get("/data/config/info.json").then((response) => (myInfo.value = response.data.info));
       }
     } catch (error) {
       console.log(error);
@@ -33,9 +31,7 @@ export const useBlogStore = defineStore("blogStore", () => {
   async function getMyLinks() {
     try {
       if (myLinks.value.length < 1) {
-        await axios
-          .get("/data/config/links.json")
-          .then((response) => (myLinks.value = response.data.links));
+        await axios.get("/data/config/links.json").then((response) => (myLinks.value = response.data.links));
       }
     } catch (error) {
       console.log(error);
@@ -48,9 +44,7 @@ export const useBlogStore = defineStore("blogStore", () => {
   async function getMyBlogs() {
     try {
       if (myBlogs.value.length < 1) {
-        await axios
-          .get("/data/config/blogs.json")
-          .then((response) => (myBlogs.value = response.data.blogs.reverse()));
+        await axios.get("/data/config/blogs.json").then((response) => (myBlogs.value = response.data.blogs.reverse()));
       }
       if (import.meta.env.PROD) {
         filteredBlogs();

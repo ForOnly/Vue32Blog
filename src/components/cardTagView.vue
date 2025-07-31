@@ -17,11 +17,7 @@ const props = defineProps({
           <div class="content">
             <div class="blog-card-tag is-size-6">
               {{ tag.name }}
-              <div class="is-size-7">
-                {{ tag.posts.length }} post{{
-                  `${tag.posts.length !== 1 ? "s" : ""}`
-                }}
-              </div>
+              <div class="is-size-7">{{ tag.posts.length }} post{{ `${tag.posts.length !== 1 ? "s" : ""}` }}</div>
             </div>
           </div>
         </div>

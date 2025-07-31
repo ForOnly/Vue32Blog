@@ -1,102 +1,61 @@
 <script setup>
-import { RouterLink } from "vue-router";
-import { storeToRefs } from "pinia";
 import { useBlogStore } from "@/stores/blogStore";
+import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import { RouterLink } from "vue-router";
 
 const { myInfo } = storeToRefs(useBlogStore());
-
 const isBurgerOpen = ref(false);
 
-function openBurgerMenu() {
+const toggleBurgerMenu = () => {
   isBurgerOpen.value = !isBurgerOpen.value;
-}
+};
+
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Blogs", path: "/blogs" },
+  { name: "Links", path: "/links" },
+  { name: "Tags", path: "/tags" },
+  { name: "Tools", path: "/tools" },
+  { name: "About", path: "/about" },
+];
 </script>
 
 <template>
-  <nav
-    class="navbar is-fixed-top"
-    role="navigation"
-    aria-label="main navigation"
-  >
+  <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <RouterLink to="/" class="navbar-item is-size-3">
+      <RouterLink to="/" class="navbar-item is-size-4">
         {{ myInfo.blogTitle }}
       </RouterLink>
+
       <a
         role="button"
         class="navbar-burger"
         aria-label="menu"
         aria-expanded="false"
-        data-target="navbarBlogMenu"
-        active-class="is-active"
-        @click="openBurgerMenu"
-        :class="{ 'is-active': isBurgerOpen }"
-      >
+        @click="toggleBurgerMenu"
+        :class="{ 'is-active': isBurgerOpen }">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
 
-    <div
-      id="navbarBlogMenu"
-      class="navbar-menu"
-      :class="{ 'is-active': isBurgerOpen }"
-    >
-      <div class="navbar-start"></div>
+    <div :class="['navbar-menu', { 'is-active': isBurgerOpen }]">
+      <div class="navbar-start">
+        <!-- 左侧空白区，可加LOGO或菜单 -->
+      </div>
 
       <div class="navbar-end">
-        <div class="navbar-item">
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            Home
-          </RouterLink>
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/blogs"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            Blogs
-          </RouterLink>
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/links"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            Links
-          </RouterLink>
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/tags"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            Tags
-          </RouterLink>
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/tools"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            Tools
-          </RouterLink>
-          <RouterLink
-            @click="isBurgerOpen = false"
-            to="/about"
-            class="navbar-item"
-            active-class="is-active"
-          >
-            About
-          </RouterLink>
-        </div>
+        <RouterLink
+          v-for="link in navLinks"
+          :key="link.path"
+          :to="link.path"
+          class="navbar-item"
+          active-class="is-active"
+          @click="isBurgerOpen = false">
+          {{ link.name }}
+        </RouterLink>
       </div>
     </div>
   </nav>
